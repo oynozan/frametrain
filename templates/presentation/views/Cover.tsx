@@ -9,8 +9,6 @@ export default function CoverView(config: Config, page: number = 0) {
     // Background
     const background: any = {}
 
-    console.log(config)
-
     switch (config.background?.type) {
         case 'color': {
             background['background'] = config.background.value // Covers gradients and solid colors at the same time
