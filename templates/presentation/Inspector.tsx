@@ -319,7 +319,7 @@ export default function Inspector() {
                                 }}
                                 className="w-40 h-40 flex items-center justify-center p-2 border-input border-[1px] rounded-md cursor-pointer"
                             >
-                                <span className="text-2xl">+</span>
+                                <span className="text-4xl">+</span>
                             </div>
                             {(config?.content?.text || [])?.map((t: string, i: number) => {
                                 const isCurrent = i === currentSlide
@@ -337,6 +337,27 @@ export default function Inspector() {
                                 )
                             })}
                         </div>
+
+                        {config?.content?.text?.length > 0 && (
+                            <Button
+                                className="mt-2 w-1/2"
+                                variant="destructive"
+                                onClick={() => {
+                                    const contentArr = config?.content?.text || []
+                                    contentArr.splice(currentSlide, 1)
+                                    setCurrentSlide((c) => Math.max(0, c - 1))
+                                    updateConfig({
+                                        content: {
+                                            ...PRESENTATION_DEFAULTS.content,
+                                            ...config.content,
+                                            text: contentArr,
+                                        },
+                                    })
+                                }}
+                            >
+                                Remove Slide
+                            </Button>
+                        )}
 
                         {/* Content */}
                         <h3 className="text-lg">Content</h3>
